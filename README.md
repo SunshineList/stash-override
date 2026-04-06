@@ -31,8 +31,8 @@
 ## ⚙️ 在 Stash 里改参数
 
 - 各脚本通过 **`$argument`** 接收参数，格式与 URL 查询串相同，例如 `city=Beijing&count=8`。具体键名、默认值见对应 `scripts/*.js` 文件顶部的 **argument** 注释，以及下表「argument 示例」列。  
-- **改覆写 YAML**：编辑已订阅的 `.stoverride`（或在本仓库改 `stoverride/*.stoverride` 后再更新订阅），在 `tiles` 里找到该磁贴，修改 **`argument:`** 一行，保存后在 Stash 中 **更新覆写 / 重新拉取**。  
-- **App 内是否可改**：部分 Stash 版本可能在磁贴或脚本详情里提供参数编辑；若有，改完同样会写入覆写。以你当前版本界面为准，并参考官方 [Tile 脚本说明](https://stash.wiki/en/script/tile)。  
+- **推荐做法（当前多数版本）**：Stash **App 内通常无法单独编辑磁贴参数**；请用文本编辑器或「覆写 → 编辑」打开已导入的 `.stoverride`，在 `tiles` 里找到对应磁贴，修改 **`argument:`**，保存后在 Stash 中 **更新覆写 / 重新拉取订阅**。也可 Fork 本仓库改 `stoverride/*.stoverride` 后改用你自己的 raw 地址。  
+- 官方行为以当前客户端为准，详见 [Tile 脚本说明](https://stash.wiki/en/script/tile)。  
 
 ---
 
@@ -49,6 +49,7 @@ stash/
 │   ├── *.js                      📜 各磁贴逻辑（Stash 远程加载）
 │   ├── lunar-holiday.js          📦 构建产物（CI 或本地生成后提交）
 │   ├── lunar-holiday-tail.js     ✏️ 农历·假日业务代码（主要改这个）
+│   ├── stash-lunar-umd-polyfill.js  🔧 构建时置于 lunar 脚本前（Stash 全局兼容）
 │   ├── build-lunar-holiday.sh
 │   └── vendor/
 │       └── solarlunar.min.js     📚 npm solarlunar UMD（见致谢）
@@ -67,6 +68,8 @@ stash/
 | 2️⃣ | `git push` 到 **`main` / `master`**（或手动跑 **Actions → Lunar holiday bundle → Run workflow**） |
 | 3️⃣ | Workflow 执行 `build-lunar-holiday.sh`，如有变化会自动提交 `scripts/lunar-holiday.js` |
 | 🧪 | 可选本地自检：`bash scripts/build-lunar-holiday.sh` |
+
+若磁贴长期停在 **「加载中」**，多为脚本在沙箱里初始化失败（已用 `stash-lunar-umd-polyfill.js` + 构建时替换 UMD 的 `this` 缓解）；请 **更新覆写** 拉取最新 `lunar-holiday.js`。仍失败时请开 issue 并注明 Stash 版本。
 
 > ⚠️ 仓库需在 GitHub **Settings → Actions → General** 中为 Workflow 开启 **Read and write**，否则 bot 无法推送构建提交。
 

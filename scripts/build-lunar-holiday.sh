@@ -12,5 +12,11 @@ if [[ ! -f "$VENDOR" ]]; then
   exit 1
 fi
 
-cat "$VENDOR" "$TAIL" > "$OUT"
+POLY="$ROOT/scripts/stash-lunar-umd-polyfill.js"
+{
+  cat "$POLY"
+  # UMD 默认 `})(this,`：沙箱里 this 常为 undefined，改为 globalThis（上已 polyfill）
+  sed 's/})(this,/})(globalThis,/' "$VENDOR"
+  cat "$TAIL"
+} > "$OUT"
 echo "Wrote $OUT ($(wc -c < "$OUT" | tr -d ' ') bytes)"

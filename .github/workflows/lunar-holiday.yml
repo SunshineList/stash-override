@@ -8,12 +8,14 @@ on:
     branches: [main, master]
     paths:
       - 'scripts/lunar-holiday-tail.js'
+      - 'scripts/stash-lunar-umd-polyfill.js'
       - 'scripts/vendor/solarlunar.min.js'
       - 'scripts/build-lunar-holiday.sh'
       - '.github/workflows/lunar-holiday.yml'
   pull_request:
     paths:
       - 'scripts/lunar-holiday-tail.js'
+      - 'scripts/stash-lunar-umd-polyfill.js'
       - 'scripts/vendor/solarlunar.min.js'
       - 'scripts/build-lunar-holiday.sh'
       - 'scripts/lunar-holiday.js'

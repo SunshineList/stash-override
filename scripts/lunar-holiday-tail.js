@@ -42,11 +42,28 @@ var mo = now.getMonth() + 1;
 var da = now.getDate();
 var todayStr = y + '-' + pad2(mo) + '-' + pad2(da);
 
-var lunar = typeof solarLunar !== 'undefined' ? solarLunar.solar2lunar(y, mo, da) : null;
-if (!lunar || lunar === -1) {
+var lunar = null;
+var lunarErr = false;
+try {
+  if (typeof solarLunar !== 'undefined' && solarLunar.solar2lunar) {
+    lunar = solarLunar.solar2lunar(y, mo, da);
+  }
+} catch (eLunar) {
+  lunarErr = true;
   $done({
     title: '🌙 农历·假日',
-    content: '⚠️ 农历库未加载（请使用构建后的 lunar-holiday.js）。',
+    content: '❌ 农历库运行失败：' + String(eLunar) + '\n请更新覆写或向仓库提 issue。',
+    icon: 'calendar',
+    backgroundColor: '#6D4C41',
+  });
+}
+
+if (lunarErr) {
+  /* 已 $done */
+} else if (!lunar || lunar === -1) {
+  $done({
+    title: '🌙 农历·假日',
+    content: '⚠️ 农历库未加载（请使用仓库构建后的 lunar-holiday.js）。',
     icon: 'calendar',
     backgroundColor: '#6D4C41',
   });
@@ -70,26 +87,7 @@ if (!lunar || lunar === -1) {
     );
   }
 
-  fetchHolidays(y, function (e1, r1, b1) {
-    var listA = [];
-    if (!e1 && b1) {
-      try {
-        listA = JSON.parse(b1);
-      } catch (x) {
-        listA = [];
-      }
-    }
-
-    fetchHolidays(y + 1, function (e2, r2, b2) {
-      var listB = [];
-      if (!e2 && b2) {
-        try {
-          listB = JSON.parse(b2);
-        } catch (x2) {
-          listB = [];
-        }
-      }
-
+  function mergeAndDone(listA, listB) {
       var all = [];
       for (var a = 0; a < listA.length; a++) all.push(listA[a]);
       for (var b = 0; b < listB.length; b++) all.push(listB[b]);
@@ -140,6 +138,37 @@ if (!lunar || lunar === -1) {
         backgroundColor: '#6D4C41',
         url: 'https://www.timeanddate.com/holidays/china/',
       });
-    });
+  }
+
+  fetchHolidays(y, function (e1, r1, b1) {
+    var listA = [];
+    if (!e1 && b1) {
+      try {
+        listA = JSON.parse(b1);
+      } catch (x) {
+        listA = [];
+      }
+    }
+
+    function runSecond() {
+      fetchHolidays(y + 1, function (e2, r2, b2) {
+        var listB = [];
+        if (!e2 && b2) {
+          try {
+            listB = JSON.parse(b2);
+          } catch (x2) {
+            listB = [];
+          }
+        }
+        mergeAndDone(listA, listB);
+      });
+    }
+
+    /* 部分环境下嵌套同步 $httpClient 可能卡住，延后一拍再发第二年请求 */
+    if (typeof setTimeout === 'function') {
+      setTimeout(runSecond, 0);
+    } else {
+      runSecond();
+    }
   });
 }
