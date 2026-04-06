@@ -1,0 +1,144 @@
+name: Stash 磁贴合集
+desc: 含农历·法定假日等 14 项；农历为本地库、假日来自 Nager（与国务院调休未必完全一致）。仓库 github.com/SunshineList/stash-override，分支 main。
+tiles:
+  - name: stash_weather
+    title: 天气
+    content: 加载中…
+    icon: cloud.sun.fill
+    backgroundColor: '#4A90D9'
+    argument: 'city=Beijing'
+    interval: 1200
+  - name: stash_rates
+    title: 汇率
+    content: 加载中…
+    icon: dollarsign.circle.fill
+    backgroundColor: '#2E7D32'
+    argument: 'from=USD&to=CNY,EUR,JPY,GBP'
+    interval: 1800
+  - name: stash_hotsearch
+    title: 热榜
+    content: 加载中…
+    icon: text.badge.star
+    backgroundColor: '#FFD700'
+    argument: 'platform=今日头条&count=8'
+    interval: 900
+  - name: stash_movies
+    title: 热映
+    content: 加载中…
+    icon: film.fill
+    backgroundColor: '#8E44AD'
+    argument: 'city=beijing&count=8'
+    interval: 1200
+  - name: stash_oil
+    title: 油价参考
+    content: 加载中…
+    icon: fuelpump.fill
+    backgroundColor: '#C932A9'
+    argument: ''
+    interval: 3600
+  - name: stash_bing
+    title: 必应壁纸
+    content: 加载中…
+    icon: photo.fill
+    backgroundColor: '#2B579A'
+    argument: 'idx=0&mkt=zh-CN'
+    interval: 3600
+  - name: stash_onthisday
+    title: 历史上的今天
+    content: 加载中…
+    icon: book.closed.fill
+    backgroundColor: '#8D6E63'
+    argument: 'lang=zh&count=6'
+    interval: 7200
+  - name: stash_hitokoto
+    title: 一言
+    content: 加载中…
+    icon: quote.bubble.fill
+    backgroundColor: '#5C6BC0'
+    argument: 'c=d&max=120'
+    interval: 600
+  - name: stash_crypto
+    title: 加密货币
+    content: 加载中…
+    icon: bitcoinsign.circle.fill
+    backgroundColor: '#F7931A'
+    argument: 'ids=bitcoin,ethereum,solana&vs=cny'
+    interval: 1200
+  - name: stash_quakes
+    title: 地震快讯
+    content: 加载中…
+    icon: waveform.path.ecg
+    backgroundColor: '#BF360C'
+    argument: 'feed=4.5&count=8'
+    interval: 900
+  - name: stash_hn
+    title: Hacker News
+    content: 加载中…
+    icon: newspaper.fill
+    backgroundColor: '#FF6600'
+    argument: 'count=8'
+    interval: 900
+  - name: stash_aqi
+    title: 空气质量
+    content: 加载中…
+    icon: wind
+    backgroundColor: '#00838F'
+    argument: 'city=Beijing'
+    interval: 1800
+  - name: stash_iss
+    title: ISS
+    content: 加载中…
+    icon: globe.americas.fill
+    backgroundColor: '#1565C0'
+    argument: ''
+    interval: 600
+  - name: stash_lunar
+    title: 农历·假日
+    content: 加载中…
+    icon: calendar
+    backgroundColor: '#6D4C41'
+    argument: 'upcoming=6'
+    interval: 3600
+script-providers:
+  stash_weather:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/weather.js
+    interval: 86400
+  stash_rates:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/rates.js
+    interval: 86400
+  stash_hotsearch:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/hot-search.js
+    interval: 86400
+  stash_movies:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/movies.js
+    interval: 86400
+  stash_oil:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/oil.js
+    interval: 86400
+  stash_bing:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/bing-wallpaper.js
+    interval: 86400
+  stash_onthisday:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/on-this-day.js
+    interval: 86400
+  stash_hitokoto:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/hitokoto.js
+    interval: 86400
+  stash_crypto:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/crypto.js
+    interval: 86400
+  stash_quakes:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/earthquakes.js
+    interval: 86400
+  stash_hn:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/hn-front.js
+    interval: 86400
+  stash_aqi:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/air-quality.js
+    interval: 86400
+  stash_iss:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/iss-tracker.js
+    interval: 86400
+  stash_lunar:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/lunar-holiday.js
+    interval: 86400

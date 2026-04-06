@@ -1,0 +1,14 @@
+name: 地震快讯(USGS)
+desc: 无 Key。feed=2.5|4.5|significant，count=8。
+tiles:
+  - name: stash_quakes
+    title: 地震快讯
+    content: 加载中…
+    icon: waveform.path.ecg
+    backgroundColor: '#BF360C'
+    argument: 'feed=4.5&count=8'
+    interval: 900
+script-providers:
+  stash_quakes:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/earthquakes.js
+    interval: 86400

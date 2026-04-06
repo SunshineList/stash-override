@@ -1,0 +1,14 @@
+name: 历史上的今天(维基)
+desc: 无 Key。lang=zh|en，count=6。数据来自 Wikimedia Feed。
+tiles:
+  - name: stash_onthisday
+    title: 历史上的今天
+    content: 加载中…
+    icon: book.closed.fill
+    backgroundColor: '#8D6E63'
+    argument: 'lang=zh&count=6'
+    interval: 7200
+script-providers:
+  stash_onthisday:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/on-this-day.js
+    interval: 86400

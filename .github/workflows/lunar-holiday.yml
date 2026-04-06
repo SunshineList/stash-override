@@ -1,0 +1,75 @@
+# 在 GitHub 上拼接 vendor/solarlunar.min.js + lunar-holiday-tail.js → lunar-holiday.js
+# push 到默认分支：若有差异则自动提交；PR：仅校验是否已同步
+
+name: Lunar holiday bundle
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'scripts/lunar-holiday-tail.js'
+      - 'scripts/vendor/solarlunar.min.js'
+      - 'scripts/build-lunar-holiday.sh'
+      - '.github/workflows/lunar-holiday.yml'
+  pull_request:
+    paths:
+      - 'scripts/lunar-holiday-tail.js'
+      - 'scripts/vendor/solarlunar.min.js'
+      - 'scripts/build-lunar-holiday.sh'
+      - 'scripts/lunar-holiday.js'
+      - '.github/workflows/lunar-holiday.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: lunar-holiday-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rebuild-and-push:
+    name: Rebuild and commit
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build lunar-holiday.js
+        run: bash scripts/build-lunar-holiday.sh
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet HEAD -- scripts/lunar-holiday.js; then
+            echo "scripts/lunar-holiday.js already matches build output."
+            exit 0
+          fi
+          git add scripts/lunar-holiday.js
+          git commit -m "chore: rebuild scripts/lunar-holiday.js [skip ci]"
+          git push
+
+  verify-pr:
+    name: Verify bundle matches sources
+    # Fork PR 合入后由 main 上的 rebuild 任务生成 lunar-holiday.js；仅本仓库内分支 PR 校验是否已同步
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build lunar-holiday.js
+        run: bash scripts/build-lunar-holiday.sh
+
+      - name: Check for drift
+        run: |
+          if git diff --quiet HEAD -- scripts/lunar-holiday.js; then
+            echo "OK: scripts/lunar-holiday.js matches build output."
+          else
+            echo "::error::scripts/lunar-holiday.js 与构建结果不一致。请执行: bash scripts/build-lunar-holiday.sh 并提交，或直接合入后由 CI 在 main 上生成。"
+            git diff -- scripts/lunar-holiday.js
+            exit 1
+          fi

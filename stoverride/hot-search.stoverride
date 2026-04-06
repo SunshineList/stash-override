@@ -1,0 +1,14 @@
+name: 平台热榜(TopHub)
+desc: 无 Key，解析 tophub 移动页。platform=微博|知乎|今日头条… count=8。详见 scripts/hot-search.js 内 PLATFORM_HASH。
+tiles:
+  - name: stash_hotsearch
+    title: 热榜
+    content: 加载中…
+    icon: text.badge.star
+    backgroundColor: '#FFD700'
+    argument: 'platform=今日头条&count=8'
+    interval: 900
+script-providers:
+  stash_hotsearch:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/hot-search.js
+    interval: 86400

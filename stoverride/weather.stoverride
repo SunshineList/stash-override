@@ -1,0 +1,14 @@
+name: 天气(Open-Meteo)
+desc: 无 Key。argument 示例 city=Beijing 或 lat=39.9&lon=116.4。脚本来源 SunshineList/stash-override。
+tiles:
+  - name: stash_weather
+    title: 天气
+    content: 加载中…
+    icon: cloud.sun.fill
+    backgroundColor: '#4A90D9'
+    argument: 'city=Beijing'
+    interval: 1200
+script-providers:
+  stash_weather:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/weather.js
+    interval: 86400

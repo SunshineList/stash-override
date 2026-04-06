@@ -1,0 +1,14 @@
+name: 加密货币(CoinGecko)
+desc: 无 Key。ids 逗号分隔；vs=cny 或 cny,usd。注意免费 API 限速，勿过频刷新。
+tiles:
+  - name: stash_crypto
+    title: 加密货币
+    content: 加载中…
+    icon: bitcoinsign.circle.fill
+    backgroundColor: '#F7931A'
+    argument: 'ids=bitcoin,ethereum,solana&vs=cny'
+    interval: 1200
+script-providers:
+  stash_crypto:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/crypto.js
+    interval: 86400

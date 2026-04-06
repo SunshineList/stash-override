@@ -1,0 +1,14 @@
+name: 一言(Hitokoto)
+desc: 无 Key。c 为分类字母（如 d 文学），留空随机。max 控制字数。
+tiles:
+  - name: stash_hitokoto
+    title: 一言
+    content: 加载中…
+    icon: quote.bubble.fill
+    backgroundColor: '#5C6BC0'
+    argument: 'c=d&max=120'
+    interval: 600
+script-providers:
+  stash_hitokoto:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/hitokoto.js
+    interval: 86400

@@ -1,0 +1,14 @@
+name: 农历与法定假日
+desc: 本地农历(solarlunar)+中国法定假日(Nager)。upcoming=6。请使用构建后的 scripts/lunar-holiday.js（见 README）。
+tiles:
+  - name: stash_lunar
+    title: 农历·假日
+    content: 加载中…
+    icon: calendar
+    backgroundColor: '#6D4C41'
+    argument: 'upcoming=6'
+    interval: 3600
+script-providers:
+  stash_lunar:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/lunar-holiday.js
+    interval: 86400

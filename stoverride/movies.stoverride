@@ -1,0 +1,14 @@
+name: 热映电影(豆瓣)
+desc: 无 Key。city 为豆瓣路径段，如 beijing、shanghai、suzhou。count=8。
+tiles:
+  - name: stash_movies
+    title: 热映
+    content: 加载中…
+    icon: film.fill
+    backgroundColor: '#8E44AD'
+    argument: 'city=beijing&count=8'
+    interval: 1200
+script-providers:
+  stash_movies:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/movies.js
+    interval: 86400

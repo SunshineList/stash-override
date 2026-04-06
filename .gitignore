@@ -1,0 +1,26 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# 编辑器 / IDE（按需删掉你不想忽略的行）
+.idea/
+*.swp
+*.swo
+*~
+
+# Node（若以后加 package.json / 本地跑脚本）
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# 环境变量（勿把密钥提交进库）
+.env
+.env.*.local
+
+# 临时与打包
+*.tgz
+*.tmp
+/tmp/

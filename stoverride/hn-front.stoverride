@@ -1,0 +1,14 @@
+name: Hacker News 首页
+desc: 无 Key，解析 hnrss.org RSS。count=8；url= 可换 newest 等源。
+tiles:
+  - name: stash_hn
+    title: Hacker News
+    content: 加载中…
+    icon: newspaper.fill
+    backgroundColor: '#FF6600'
+    argument: 'count=8'
+    interval: 900
+script-providers:
+  stash_hn:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/hn-front.js
+    interval: 86400

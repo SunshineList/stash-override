@@ -1,0 +1,14 @@
+name: 油价参考(GlobalPetrolPrices)
+desc: 无 Key。展示中国汽油/柴油全国统计口径（非各省发改委挂牌价），详见脚本注释。
+tiles:
+  - name: stash_oil
+    title: 油价参考
+    content: 加载中…
+    icon: fuelpump.fill
+    backgroundColor: '#C932A9'
+    argument: ''
+    interval: 3600
+script-providers:
+  stash_oil:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/oil.js
+    interval: 86400

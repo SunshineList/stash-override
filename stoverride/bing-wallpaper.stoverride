@@ -1,0 +1,14 @@
+name: 必应每日壁纸
+desc: 无 Key。idx=0 今天；mkt=zh-CN。
+tiles:
+  - name: stash_bing
+    title: 必应壁纸
+    content: 加载中…
+    icon: photo.fill
+    backgroundColor: '#2B579A'
+    argument: 'idx=0&mkt=zh-CN'
+    interval: 3600
+script-providers:
+  stash_bing:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/bing-wallpaper.js
+    interval: 86400

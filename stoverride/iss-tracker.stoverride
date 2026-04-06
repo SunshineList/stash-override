@@ -1,0 +1,14 @@
+name: 国际空间站位置
+desc: 无 Key。HTTPS wheretheiss.at，实时经纬度与高度。
+tiles:
+  - name: stash_iss
+    title: ISS
+    content: 加载中…
+    icon: globe.americas.fill
+    backgroundColor: '#1565C0'
+    argument: ''
+    interval: 600
+script-providers:
+  stash_iss:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/iss-tracker.js
+    interval: 86400

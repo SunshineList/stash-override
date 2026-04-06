@@ -1,0 +1,14 @@
+name: 空气质量(Open-Meteo)
+desc: 无 Key。city=Beijing 或 lat=&lon=。US AQI 与 PM 等。
+tiles:
+  - name: stash_aqi
+    title: 空气质量
+    content: 加载中…
+    icon: wind
+    backgroundColor: '#00838F'
+    argument: 'city=Beijing'
+    interval: 1800
+script-providers:
+  stash_aqi:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/air-quality.js
+    interval: 86400

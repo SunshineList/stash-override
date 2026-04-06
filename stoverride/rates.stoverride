@@ -1,0 +1,14 @@
+name: 汇率(Frankfurter)
+desc: 无 Key，ECB 口径。argument 示例 from=USD&to=CNY,EUR,JPY。
+tiles:
+  - name: stash_rates
+    title: 汇率
+    content: 加载中…
+    icon: dollarsign.circle.fill
+    backgroundColor: '#2E7D32'
+    argument: 'from=USD&to=CNY,EUR,JPY,GBP'
+    interval: 1800
+script-providers:
+  stash_rates:
+    url: https://raw.githubusercontent.com/SunshineList/stash-override/main/scripts/rates.js
+    interval: 86400
