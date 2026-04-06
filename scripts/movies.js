@@ -45,8 +45,8 @@ $httpClient.get(
   function (err, resp, body) {
     if (err || !body) {
       $done({
-        title: '热映电影',
-        content: '请求失败：' + (err || '无数据'),
+        title: '🎬 热映',
+        content: '❌ 请求失败：' + (err || '无数据'),
         icon: 'film.fill',
         backgroundColor: '#8E44AD',
         url: 'https://movie.douban.com/',
@@ -69,9 +69,9 @@ $httpClient.get(
 
     if (titles.length === 0) {
       $done({
-        title: '热映电影',
+        title: '🎬 热映',
         content:
-          '未解析到影片（豆瓣页面结构可能变更或被拦截）。\n请检查 city 拼写或更新 scripts/movies.js。\n' +
+          '⚠️ 未解析到影片（豆瓣页面结构可能变更或被拦截）。\n请检查 city 拼写或更新 scripts/movies.js。\n' +
           url,
         icon: 'film.fill',
         backgroundColor: '#8E44AD',
@@ -84,12 +84,12 @@ $httpClient.get(
     for (var i = 0; i < titles.length && i < count; i++) {
       var sc = scores[i] === '0' ? '暂无' : scores[i];
       var ac = actors[i] ? actors[i].split(' / ').slice(0, 2).join('、') : '';
-      lines.push(titles[i] + ' · ' + sc + (ac ? '\n  ' + ac : ''));
+      lines.push('🎬 ' + titles[i] + '\n   ⭐ ' + sc + (ac ? '  👤 ' + ac : ''));
     }
-    lines.push('\n城市 ' + city + ' · 豆瓣');
+    lines.push('\n🏙️ 城市 ' + city + ' · 🎞️ 豆瓣');
 
     $done({
-      title: '热映 · ' + city,
+      title: '🎬 热映 · ' + city,
       content: lines.join('\n'),
       icon: 'film.fill',
       backgroundColor: '#8E44AD',

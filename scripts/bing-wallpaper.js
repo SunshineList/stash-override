@@ -46,8 +46,8 @@ $httpClient.get(
   function (err, resp, body) {
     if (err || !body) {
       $done({
-        title: '必应壁纸',
-        content: '请求失败：' + (err || '无数据'),
+        title: '🖼️ 必应壁纸',
+        content: '❌ 请求失败：' + (err || '无数据'),
         icon: 'photo.fill',
         backgroundColor: '#2B579A',
       });
@@ -57,8 +57,8 @@ $httpClient.get(
       var j = JSON.parse(body);
       if (!j.images || !j.images.length) {
         $done({
-          title: '必应壁纸',
-          content: '无图片数据',
+          title: '🖼️ 必应壁纸',
+          content: '😶 无图片数据',
           icon: 'photo.fill',
           backgroundColor: '#2B579A',
         });
@@ -67,12 +67,12 @@ $httpClient.get(
       var im = j.images[0];
       var pic = 'https://www.bing.com' + im.url;
       var lines = [];
-      if (im.title) lines.push(im.title);
-      if (im.copyright) lines.push(im.copyright);
+      if (im.title) lines.push('✨ ' + im.title);
+      if (im.copyright) lines.push('©️ ' + im.copyright);
       lines.push('');
-      lines.push(pic);
+      lines.push('🔗 ' + pic);
       $done({
-        title: '必应壁纸',
+        title: '🖼️ 必应壁纸',
         content: lines.join('\n'),
         icon: 'photo.fill',
         backgroundColor: '#2B579A',
@@ -80,8 +80,8 @@ $httpClient.get(
       });
     } catch (e) {
       $done({
-        title: '必应壁纸',
-        content: '解析失败：' + e,
+        title: '🖼️ 必应壁纸',
+        content: '❌ 解析失败：' + e,
         icon: 'photo.fill',
         backgroundColor: '#2B579A',
       });

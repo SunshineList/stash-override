@@ -53,8 +53,8 @@ $httpClient.get(
   function (err, resp, body) {
     if (err || !body) {
       $done({
-        title: '加密货币',
-        content: '请求失败：' + (err || '无数据'),
+        title: '₿ 加密货币',
+        content: '❌ 请求失败：' + (err || '无数据'),
         icon: 'bitcoinsign.circle.fill',
         backgroundColor: '#F7931A',
         url: 'https://www.coingecko.com/',
@@ -70,7 +70,7 @@ $httpClient.get(
         if (!id) continue;
         var row = j[id];
         if (!row) {
-          lines.push(id + '：无数据');
+          lines.push('❔ ' + id + '：无数据');
           continue;
         }
         var bits = [];
@@ -78,13 +78,13 @@ $httpClient.get(
           var c = vsList[k];
           if (row[c] != null) bits.push(c.toUpperCase() + ' ' + row[c]);
         }
-        lines.push(id + '\n  ' + bits.join('  ·  '));
+        lines.push('🪙 ' + id + '\n  ' + bits.join('  ·  '));
       }
-      if (lines.length === 0) lines.push('无返回，请检查 ids 拼写');
+      if (lines.length === 0) lines.push('⚠️ 无返回，请检查 ids 拼写');
       lines.push('');
-      lines.push('CoinGecko');
+      lines.push('📊 CoinGecko');
       $done({
-        title: '加密货币',
+        title: '₿ 加密货币',
         content: lines.join('\n'),
         icon: 'bitcoinsign.circle.fill',
         backgroundColor: '#F7931A',
@@ -92,8 +92,8 @@ $httpClient.get(
       });
     } catch (e) {
       $done({
-        title: '加密货币',
-        content: '解析失败：' + e,
+        title: '₿ 加密货币',
+        content: '❌ 解析失败：' + e,
         icon: 'bitcoinsign.circle.fill',
         backgroundColor: '#F7931A',
       });

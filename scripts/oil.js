@@ -14,17 +14,17 @@ function extractOgDescription(html) {
   return m ? m[1] : '';
 }
 
-function parseStats(desc, label) {
-  if (!desc) return label + '：无数据';
+function parseStats(desc, label, emoji) {
+  if (!desc) return emoji + ' ' + label + '：无数据';
   var avg = desc.match(/平均价格\s+([0-9.]+)/);
   var min = desc.match(/最低价格[^的]+的\s+([0-9.]+)/);
   var max = desc.match(/最高价格[^的]+的\s+([0-9.]+)/);
   var world = desc.match(/世界平均[^0-9]*([0-9.]+)|世界各地[^0-9]*([0-9.]+)/);
-  var parts = [label];
-  if (avg) parts.push('平均 ' + avg[1] + ' 元/升(口径见站方)');
-  if (min) parts.push('最低 ' + min[1]);
-  if (max) parts.push('最高 ' + max[1]);
-  if (world) parts.push('世界均 ' + (world[1] || world[2]));
+  var parts = [emoji + ' ' + label];
+  if (avg) parts.push('📈 平均 ' + avg[1] + ' 元/升(口径见站方)');
+  if (min) parts.push('⬇️ 最低 ' + min[1]);
+  if (max) parts.push('⬆️ 最高 ' + max[1]);
+  if (world) parts.push('🌍 世界均 ' + (world[1] || world[2]));
   return parts.join('\n');
 }
 
@@ -38,8 +38,8 @@ $httpClient.get(
   function (err1, r1, gasHtml) {
     if (err1 || !gasHtml) {
       $done({
-        title: '油价参考',
-        content: '汽油页请求失败：' + (err1 || '空'),
+        title: '⛽ 油价参考',
+        content: '❌ 汽油页请求失败：' + (err1 || '空'),
         icon: 'fuelpump.fill',
         backgroundColor: '#C932A9',
         url: 'https://zh.globalpetrolprices.com/China/gasoline_prices/',
@@ -57,13 +57,13 @@ $httpClient.get(
         var dieDesc = err2 || !dieHtml ? '' : extractOgDescription(dieHtml);
 
         var content =
-          parseStats(gasDesc, '汽油(全国统计)') +
+          parseStats(gasDesc, '汽油(全国统计)', '🟡') +
           '\n\n' +
-          (dieDesc ? parseStats(dieDesc, '柴油(全国统计)') : '柴油：未获取') +
-          '\n\n各省挂牌价请以本地发改委/加油站为准。';
+          (dieDesc ? parseStats(dieDesc, '柴油(全国统计)', '🛢️') : '🛢️ 柴油：未获取') +
+          '\n\n📌 各省挂牌价请以本地发改委/加油站为准。';
 
         $done({
-          title: '油价参考 · 中国',
+          title: '⛽ 油价参考 · 中国',
           content: content,
           icon: 'fuelpump.fill',
           backgroundColor: '#C932A9',

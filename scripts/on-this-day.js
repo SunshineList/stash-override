@@ -59,8 +59,8 @@ $httpClient.get(
   function (err, resp, body) {
     if (err || !body) {
       $done({
-        title: '历史上的今天',
-        content: '请求失败：' + (err || '无数据'),
+        title: '📜 历史上的今天',
+        content: '❌ 请求失败：' + (err || '无数据'),
         icon: 'book.closed.fill',
         backgroundColor: '#8D6E63',
         url: 'https://zh.wikipedia.org/',
@@ -80,7 +80,7 @@ $httpClient.get(
           var key = t.slice(0, 80);
           if (seen[key]) continue;
           seen[key] = 1;
-          lines.push(lines.length + 1 + '. ' + t);
+          lines.push(lines.length + 1 + '. 📌 ' + t);
         }
       }
 
@@ -91,8 +91,8 @@ $httpClient.get(
 
       if (lines.length === 0) {
         $done({
-          title: '历史上的今天',
-          content: '今日暂无条目或结构已变，请检查 API。\n' + feedUrl,
+          title: '📜 历史上的今天',
+          content: '😶 今日暂无条目或结构已变，请检查 API。\n' + feedUrl,
           icon: 'book.closed.fill',
           backgroundColor: '#8D6E63',
           url: feedUrl,
@@ -101,10 +101,10 @@ $httpClient.get(
       }
 
       lines.push('');
-      lines.push('维基 · ' + mm + '/' + dd);
+      lines.push('📚 维基 · ' + mm + '/' + dd);
 
       $done({
-        title: '历史上的今天 · ' + mm + '/' + dd,
+        title: '📜 历史上的今天 · ' + mm + '/' + dd,
         content: lines.join('\n'),
         icon: 'book.closed.fill',
         backgroundColor: '#8D6E63',
@@ -112,8 +112,8 @@ $httpClient.get(
       });
     } catch (e) {
       $done({
-        title: '历史上的今天',
-        content: '解析失败：' + e,
+        title: '📜 历史上的今天',
+        content: '❌ 解析失败：' + e,
         icon: 'book.closed.fill',
         backgroundColor: '#8D6E63',
       });

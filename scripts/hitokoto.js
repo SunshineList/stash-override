@@ -43,8 +43,8 @@ $httpClient.get(
   function (err, resp, body) {
     if (err || !body) {
       $done({
-        title: '一言',
-        content: '请求失败：' + (err || '无数据'),
+        title: '💭 一言',
+        content: '❌ 请求失败：' + (err || '无数据'),
         icon: 'quote.bubble.fill',
         backgroundColor: '#5C6BC0',
         url: 'https://hitokoto.cn/',
@@ -56,12 +56,12 @@ $httpClient.get(
       var text = j.hitokoto || '';
       if (text.length > maxLen) text = text.slice(0, maxLen) + '…';
       var lines = [text, ''];
-      if (j.from) lines.push('—— 《' + j.from + '》');
-      if (j.from_who) lines.push('　　' + j.from_who);
+      if (j.from) lines.push('✒️ —— 《' + j.from + '》');
+      if (j.from_who) lines.push('　　👤 ' + j.from_who);
       lines.push('');
-      lines.push('hitokoto.cn');
+      lines.push('🔗 hitokoto.cn');
       $done({
-        title: '一言',
+        title: '💭 一言',
         content: lines.join('\n'),
         icon: 'quote.bubble.fill',
         backgroundColor: '#5C6BC0',
@@ -69,8 +69,8 @@ $httpClient.get(
       });
     } catch (e) {
       $done({
-        title: '一言',
-        content: '解析失败：' + e,
+        title: '💭 一言',
+        content: '❌ 解析失败：' + e,
         icon: 'quote.bubble.fill',
         backgroundColor: '#5C6BC0',
       });

@@ -56,8 +56,8 @@ function fetchAqi(name, latitude, longitude) {
     function (err, resp, body) {
       if (err || !body) {
         $done({
-          title: '空气质量',
-          content: '请求失败：' + (err || '无数据'),
+          title: '🌬️ 空气质量',
+          content: '❌ 请求失败：' + (err || '无数据'),
           icon: 'wind',
           backgroundColor: '#00838F',
         });
@@ -68,8 +68,8 @@ function fetchAqi(name, latitude, longitude) {
         var cur = j.current;
         if (!cur) {
           $done({
-            title: '空气质量',
-            content: '无当前数据',
+            title: '🌬️ 空气质量',
+            content: '😶 无当前数据',
             icon: 'wind',
             backgroundColor: '#00838F',
           });
@@ -77,15 +77,15 @@ function fetchAqi(name, latitude, longitude) {
         }
         var aqi = cur.us_aqi;
         var label = aqiLabel(aqi);
-        var title = (name || '位置') + ' · AQI';
+        var title = '🌬️ ' + (name || '位置') + ' · AQI';
         var lines = [];
-        if (aqi != null) lines.push('US AQI ' + aqi + (label ? '（' + label + '）' : ''));
-        if (cur.pm2_5 != null) lines.push('PM2.5  ' + cur.pm2_5 + ' μg/m³');
-        if (cur.pm10 != null) lines.push('PM10   ' + cur.pm10 + ' μg/m³');
-        if (cur.carbon_monoxide != null) lines.push('CO     ' + cur.carbon_monoxide + ' μg/m³');
-        if (cur.nitrogen_dioxide != null) lines.push('NO₂    ' + cur.nitrogen_dioxide + ' μg/m³');
-        lines.push('更新 ' + (cur.time || '') + (j.timezone ? ' · ' + j.timezone : ''));
-        lines.push('Open-Meteo Air Quality');
+        if (aqi != null) lines.push('📊 US AQI ' + aqi + (label ? '（' + label + '）' : ''));
+        if (cur.pm2_5 != null) lines.push('🌫️ PM2.5  ' + cur.pm2_5 + ' μg/m³');
+        if (cur.pm10 != null) lines.push('💨 PM10   ' + cur.pm10 + ' μg/m³');
+        if (cur.carbon_monoxide != null) lines.push('☁️ CO     ' + cur.carbon_monoxide + ' μg/m³');
+        if (cur.nitrogen_dioxide != null) lines.push('🏭 NO₂    ' + cur.nitrogen_dioxide + ' μg/m³');
+        lines.push('🕐 更新 ' + (cur.time || '') + (j.timezone ? ' · ' + j.timezone : ''));
+        lines.push('📡 Open-Meteo Air Quality');
         $done({
           title: title,
           content: lines.join('\n'),
@@ -95,8 +95,8 @@ function fetchAqi(name, latitude, longitude) {
         });
       } catch (e) {
         $done({
-          title: '空气质量',
-          content: '解析失败：' + e,
+          title: '🌬️ 空气质量',
+          content: '❌ 解析失败：' + e,
           icon: 'wind',
           backgroundColor: '#00838F',
         });
@@ -120,8 +120,8 @@ if (!isNaN(lat) && !isNaN(lon)) {
     function (err, resp, body) {
       if (err || !body) {
         $done({
-          title: '空气质量',
-          content: '地理编码失败：' + (err || '无数据'),
+          title: '🌬️ 空气质量',
+          content: '❌ 地理编码失败：' + (err || '无数据'),
           icon: 'wind',
           backgroundColor: '#00838F',
         });
@@ -131,8 +131,8 @@ if (!isNaN(lat) && !isNaN(lon)) {
         var g = JSON.parse(body);
         if (!g.results || !g.results.length) {
           $done({
-            title: '空气质量',
-            content: '未找到：' + city + '\n请用英文地名或 lat=&lon=',
+            title: '🌬️ 空气质量',
+            content: '🔍 未找到：' + city + '\n请用英文地名或 lat=&lon=',
             icon: 'wind',
             backgroundColor: '#00838F',
           });
@@ -143,8 +143,8 @@ if (!isNaN(lat) && !isNaN(lon)) {
         fetchAqi(label, r.latitude, r.longitude);
       } catch (e) {
         $done({
-          title: '空气质量',
-          content: '解析失败：' + e,
+          title: '🌬️ 空气质量',
+          content: '❌ 解析失败：' + e,
           icon: 'wind',
           backgroundColor: '#00838F',
         });

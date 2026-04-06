@@ -28,6 +28,14 @@
 
 ---
 
+## ⚙️ 在 Stash 里改参数
+
+- 各脚本通过 **`$argument`** 接收参数，格式与 URL 查询串相同，例如 `city=Beijing&count=8`。具体键名、默认值见对应 `scripts/*.js` 文件顶部的 **argument** 注释，以及下表「argument 示例」列。  
+- **改覆写 YAML**：编辑已订阅的 `.stoverride`（或在本仓库改 `stoverride/*.stoverride` 后再更新订阅），在 `tiles` 里找到该磁贴，修改 **`argument:`** 一行，保存后在 Stash 中 **更新覆写 / 重新拉取**。  
+- **App 内是否可改**：部分 Stash 版本可能在磁贴或脚本详情里提供参数编辑；若有，改完同样会写入覆写。以你当前版本界面为准，并参考官方 [Tile 脚本说明](https://stash.wiki/en/script/tile)。  
+
+---
+
 ## 📁 目录结构
 
 ```text

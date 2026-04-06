@@ -73,8 +73,8 @@ function finishForecast(name, latitude, longitude) {
     function (err, resp, body) {
       if (err || !body) {
         $done({
-          title: '天气',
-          content: '获取预报失败：' + (err || '无数据'),
+          title: '🌤️ 天气',
+          content: '❌ 获取预报失败：' + (err || '无数据'),
           icon: 'cloud.sun.fill',
           backgroundColor: '#4A90D9',
         });
@@ -85,22 +85,22 @@ function finishForecast(name, latitude, longitude) {
         var cur = j.current;
         if (!cur) {
           $done({
-            title: '天气',
-            content: '返回异常，请检查坐标。',
+            title: '🌤️ 天气',
+            content: '❌ 返回异常，请检查坐标。',
             icon: 'cloud.sun.fill',
             backgroundColor: '#4A90D9',
           });
           return;
         }
         var tz = j.timezone || '';
-        var title = (name || '位置') + ' · 天气';
+        var title = '🌤️ ' + (name || '位置') + ' · 天气';
         var lines = [
-          wmoText(cur.weather_code),
-          '气温 ' + cur.temperature_2m + '°C',
-          '体感 ' + cur.apparent_temperature + '°C',
-          '湿度 ' + cur.relative_humidity_2m + '%',
-          '风速 ' + cur.wind_speed_10m + ' km/h',
-          '更新 ' + cur.time + (tz ? ' · ' + tz : ''),
+          '🌈 ' + wmoText(cur.weather_code),
+          '🌡️ 气温 ' + cur.temperature_2m + '°C',
+          '🤒 体感 ' + cur.apparent_temperature + '°C',
+          '💧 湿度 ' + cur.relative_humidity_2m + '%',
+          '💨 风速 ' + cur.wind_speed_10m + ' km/h',
+          '🕐 更新 ' + cur.time + (tz ? ' · ' + tz : ''),
         ];
         $done({
           title: title,
@@ -111,8 +111,8 @@ function finishForecast(name, latitude, longitude) {
         });
       } catch (e) {
         $done({
-          title: '天气',
-          content: '解析失败：' + e,
+          title: '🌤️ 天气',
+          content: '❌ 解析失败：' + e,
           icon: 'cloud.sun.fill',
           backgroundColor: '#4A90D9',
         });
@@ -136,8 +136,8 @@ if (!isNaN(lat) && !isNaN(lon)) {
     function (err, resp, body) {
       if (err || !body) {
         $done({
-          title: '天气',
-          content: '地理编码失败：' + (err || '无数据'),
+          title: '🌤️ 天气',
+          content: '❌ 地理编码失败：' + (err || '无数据'),
           icon: 'cloud.sun.fill',
           backgroundColor: '#4A90D9',
         });
@@ -147,8 +147,8 @@ if (!isNaN(lat) && !isNaN(lon)) {
         var g = JSON.parse(body);
         if (!g.results || !g.results.length) {
           $done({
-            title: '天气',
-            content: '未找到：' + city + '\n请用英文地名或 lat=&lon=',
+            title: '🌤️ 天气',
+            content: '❓ 未找到：' + city + '\n请用英文地名或 lat=&lon=',
             icon: 'cloud.sun.fill',
             backgroundColor: '#4A90D9',
           });
@@ -159,8 +159,8 @@ if (!isNaN(lat) && !isNaN(lon)) {
         finishForecast(label, r.latitude, r.longitude);
       } catch (e) {
         $done({
-          title: '天气',
-          content: '解析地理失败：' + e,
+          title: '🌤️ 天气',
+          content: '❌ 解析地理失败：' + e,
           icon: 'cloud.sun.fill',
           backgroundColor: '#4A90D9',
         });

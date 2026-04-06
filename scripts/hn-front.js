@@ -39,8 +39,8 @@ $httpClient.get(
   function (err, resp, xml) {
     if (err || !xml) {
       $done({
-        title: 'Hacker News',
-        content: '请求失败：' + (err || '无数据'),
+        title: '🧡 Hacker News',
+        content: '❌ 请求失败：' + (err || '无数据'),
         icon: 'newspaper.fill',
         backgroundColor: '#FF6600',
         url: 'https://news.ycombinator.com/',
@@ -69,8 +69,8 @@ $httpClient.get(
 
     if (titles.length === 0) {
       $done({
-        title: 'Hacker News',
-        content: '未能解析 RSS，页面结构可能已变。\n' + feedUrl,
+        title: '🧡 Hacker News',
+        content: '⚠️ 未能解析 RSS，页面结构可能已变。\n' + feedUrl,
         icon: 'newspaper.fill',
         backgroundColor: '#FF6600',
         url: feedUrl,
@@ -80,13 +80,13 @@ $httpClient.get(
 
     var lines = [];
     for (var i = 0; i < titles.length; i++) {
-      lines.push(i + 1 + '. ' + titles[i]);
+      lines.push(i + 1 + '. 📰 ' + titles[i]);
     }
     lines.push('');
-    lines.push('hnrss.org');
+    lines.push('🔗 hnrss.org');
 
     $done({
-      title: 'Hacker News',
+      title: '🧡 Hacker News',
       content: lines.join('\n'),
       icon: 'newspaper.fill',
       backgroundColor: '#FF6600',

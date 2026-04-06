@@ -55,8 +55,8 @@ if (count > 30) count = 30;
 var platformValue = PLATFORM_HASH[platform];
 if (!platformValue) {
   $done({
-    title: '热榜',
-    content: '未知平台：' + platform + '\n见脚本内 PLATFORM_HASH 键名。',
+    title: '📊 热榜',
+    content: '❓ 未知平台：' + platform + '\n见脚本内 PLATFORM_HASH 键名。',
     icon: 'text.badge.star',
     backgroundColor: '#FFD700',
   });
@@ -74,8 +74,8 @@ if (!platformValue) {
     function (error, response, html) {
       if (error || !html) {
         $done({
-          title: platform + '热榜',
-          content: '请求失败：' + (error || '无内容'),
+          title: '📊 ' + platform + '热榜',
+          content: '❌ 请求失败：' + (error || '无内容'),
           icon: 'text.badge.star',
           backgroundColor: '#FFD700',
           url: pageUrl,
@@ -103,9 +103,9 @@ if (!platformValue) {
 
       if (list.length === 0) {
         $done({
-          title: platform + '热榜',
+          title: '📊 ' + platform + '热榜',
           content:
-            '解析不到标题（页面可能改版）。\n请编辑 scripts/hot-search.js 更新正则。\n' + pageUrl,
+            '⚠️ 解析不到标题（页面可能改版）。\n请编辑 scripts/hot-search.js 更新正则。\n' + pageUrl,
           icon: 'text.badge.star',
           backgroundColor: '#FFD700',
           url: pageUrl,
@@ -115,12 +115,12 @@ if (!platformValue) {
 
       var content = '';
       for (var i = 0; i < list.length && i < count; i++) {
-        content += i + 1 + ' · ' + list[i] + '\n';
+        content += i + 1 + ' 🔥 ' + list[i] + '\n';
       }
-      content += '\n来源 tophub.today';
+      content += '\n📡 来源 tophub.today';
 
       $done({
-        title: platform + '热榜',
+        title: '📊 ' + platform + '热榜',
         content: content,
         icon: 'text.badge.star',
         backgroundColor: '#FFD700',

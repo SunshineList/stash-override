@@ -45,19 +45,19 @@ var todayStr = y + '-' + pad2(mo) + '-' + pad2(da);
 var lunar = typeof solarLunar !== 'undefined' ? solarLunar.solar2lunar(y, mo, da) : null;
 if (!lunar || lunar === -1) {
   $done({
-    title: '农历·假日',
-    content: '农历库未加载（请使用构建后的 lunar-holiday.js）。',
+    title: '🌙 农历·假日',
+    content: '⚠️ 农历库未加载（请使用构建后的 lunar-holiday.js）。',
     icon: 'calendar',
     backgroundColor: '#6D4C41',
   });
 } else {
   var lunarLines = [];
-  lunarLines.push('公历 ' + y + '年' + mo + '月' + da + '日 ' + (lunar.ncWeek || ''));
+  lunarLines.push('📅 公历 ' + y + '年' + mo + '月' + da + '日 ' + (lunar.ncWeek || ''));
   var lm = (lunar.isLeap ? '闰' : '') + (lunar.monthCn || '') + (lunar.dayCn || '');
-  lunarLines.push('农历 ' + lm);
-  lunarLines.push('干支 ' + (lunar.gzYear || '') + '年 ' + (lunar.gzMonth || '') + '月 ' + (lunar.gzDay || '') + '日');
-  if (lunar.animal) lunarLines.push('生肖 ' + lunar.animal);
-  if (lunar.isTerm && lunar.term) lunarLines.push('节气 ' + lunar.term);
+  lunarLines.push('🌙 农历 ' + lm);
+  lunarLines.push('☯️ 干支 ' + (lunar.gzYear || '') + '年 ' + (lunar.gzMonth || '') + '月 ' + (lunar.gzDay || '') + '日');
+  if (lunar.animal) lunarLines.push('🐲 生肖 ' + lunar.animal);
+  if (lunar.isTerm && lunar.term) lunarLines.push('🌾 节气 ' + lunar.term);
   lunarLines.push('');
 
   function fetchHolidays(year, cb) {
@@ -102,11 +102,11 @@ if (!lunar || lunar === -1) {
           break;
         }
       }
-      if (todayName) todayNote = '今日法定假日：' + todayName + '\n\n';
+      if (todayName) todayNote = '🎉 今日法定假日：' + todayName + '\n\n';
 
-      var holLines = ['── 即将到来 ──'];
+      var holLines = ['🗓️ ── 即将到来 ──'];
       if (all.length === 0) {
-        holLines.push('假日数据获取失败（请检查网络）');
+        holLines.push('❌ 假日数据获取失败（请检查网络）');
       } else {
         var fut = [];
         for (var i = 0; i < all.length; i++) {
@@ -124,17 +124,17 @@ if (!lunar || lunar === -1) {
           var item = fut[j];
           if (seen[item.date]) continue;
           seen[item.date] = 1;
-          holLines.push(item.date + '  ' + (item.localName || item.name || ''));
+          holLines.push('📌 ' + item.date + '  ' + (item.localName || item.name || ''));
           added++;
         }
-        if (added === 0) holLines.push('年内暂无更晚的法定假日条目');
+        if (added === 0) holLines.push('😶 年内暂无更晚的法定假日条目');
       }
 
       holLines.push('');
-      holLines.push('假日 Nager.Date · 农历 solarlunar@3.1.0');
+      holLines.push('📡 假日 Nager.Date · 🌙 农历 solarlunar@3.1.0');
 
       $done({
-        title: '农历 · 法定假日',
+        title: '🌙 农历 · 法定假日',
         content: todayNote + lunarLines.join('\n') + holLines.join('\n'),
         icon: 'calendar',
         backgroundColor: '#6D4C41',

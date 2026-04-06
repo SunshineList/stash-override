@@ -49,8 +49,8 @@ $httpClient.get(
   function (err, resp, body) {
     if (err || !body) {
       $done({
-        title: '地震快讯',
-        content: '请求失败：' + (err || '无数据'),
+        title: '🌋 地震快讯',
+        content: '❌ 请求失败：' + (err || '无数据'),
         icon: 'waveform.path.ecg',
         backgroundColor: '#BF360C',
         url: 'https://earthquake.usgs.gov/',
@@ -62,8 +62,8 @@ $httpClient.get(
       var feats = j.features || [];
       if (!feats.length) {
         $done({
-          title: '地震快讯',
-          content: '过去时段内无符合条件的地震。',
+          title: '🌋 地震快讯',
+          content: '✅ 过去时段内无符合条件的地震。',
           icon: 'waveform.path.ecg',
           backgroundColor: '#BF360C',
           url: feedUrl,
@@ -76,12 +76,12 @@ $httpClient.get(
         var mag = p.mag != null ? 'M' + p.mag : 'M?';
         var place = p.place || '';
         var title = p.title || mag + ' ' + place;
-        lines.push(i + 1 + '. ' + title);
+        lines.push(i + 1 + '. 🔔 ' + title);
       }
       lines.push('');
-      lines.push('USGS · ' + (feedKey === 'significant' ? '显著' : feedKey + '+ 近24h'));
+      lines.push('📡 USGS · ' + (feedKey === 'significant' ? '显著' : feedKey + '+ 近24h'));
       $done({
-        title: '地震快讯',
+        title: '🌋 地震快讯',
         content: lines.join('\n'),
         icon: 'waveform.path.ecg',
         backgroundColor: '#BF360C',
@@ -89,8 +89,8 @@ $httpClient.get(
       });
     } catch (e) {
       $done({
-        title: '地震快讯',
-        content: '解析失败：' + e,
+        title: '🌋 地震快讯',
+        content: '❌ 解析失败：' + e,
         icon: 'waveform.path.ecg',
         backgroundColor: '#BF360C',
       });
